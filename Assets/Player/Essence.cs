@@ -11,6 +11,7 @@ public class Essence : MonoBehaviour
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private LookRotate _rotate;
     [SerializeField] private EssenceMovement _movement;
+    [SerializeField] private Hands _hands;
 
     private EssenceState _essenceState;
 
@@ -23,6 +24,7 @@ public class Essence : MonoBehaviour
     {
         InitRotate();
         InitMovement();
+        InitHends();
     }
 
     private void InitRotate()
@@ -39,6 +41,11 @@ public class Essence : MonoBehaviour
         _controlInput.OnMove += _movement.MoveInputHandler;
     }
 
+    private void InitHends()
+    {
+        _hands.OnChangeUse += (active) => SetState(active ? EssenceState.Use : EssenceState.None);
+    }
+
     private void Update()
     {
         _movement.UpdateHandler();
@@ -46,6 +53,11 @@ public class Essence : MonoBehaviour
 
     private void SetState(EssenceState state)
     {
+        if (_essenceState != EssenceState.Use)
+        {
+            _hands.Drop();
+        }
+
         _essenceState = state;
         OnChangeState?.Invoke(state);
     }
@@ -83,12 +95,17 @@ public class Essence : MonoBehaviour
 
     private void UseHandler(bool isActive)
     {
-        if (true)
+        if (!isActive)
         {
             return;
         }
 
-        SetState(EssenceState.Use);
+        if (_rotate.Hit == null || !_rotate.Hit.gameObject.TryGetComponent<SelectableObject>(out var obj))
+        {
+            return;
+        }
+
+        _hands.Use(obj);
     }
 
     private void RunHandler(bool isActive)
@@ -106,6 +123,16 @@ public class Essence : MonoBehaviour
         SetState(_essenceState == EssenceState.Run ? EssenceState.None : EssenceState.Run);
     }
 
+    private void ThrowHandler(bool isActive)
+    {
+        if (!isActive)
+        {
+            return;
+        }
+
+        _hands.Throw();
+    }
+
     private void CharacterActionHandler(CharacterAction action, bool isActive)
     {
         switch (action)
@@ -121,6 +148,9 @@ public class Essence : MonoBehaviour
                 break;
             case CharacterAction.Run:
                 RunHandler(isActive);
+                break;
+            case CharacterAction.Throw:
+                ThrowHandler(isActive);
                 break;
             default:
                 break;

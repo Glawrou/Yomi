@@ -12,6 +12,9 @@ public class PlayerInputPc : ControlInput
     [SerializeField] private KeyCode _use;
     [SerializeField] private KeyCode _run;
 
+    [Space]
+    [SerializeField] private int _throwMouseButton;
+
     [SerializeField, Range(1f, 1000f)] private float _sensitivity = 50;
 
     private void Start()
@@ -46,6 +49,7 @@ public class PlayerInputPc : ControlInput
         CheckKeyCode(_sit, CharacterAction.Sit);
         CheckKeyCode(_use, CharacterAction.Use);
         CheckKeyCode(_run, CharacterAction.Run);
+        CheckMouseButton(_throwMouseButton, CharacterAction.Throw);
     }
 
     private float GetAxis(string key)
@@ -60,6 +64,18 @@ public class PlayerInputPc : ControlInput
             OnCharacterAction?.Invoke(action, true);
         }
         else if (Input.GetKeyUp(keyCode))
+        {
+            OnCharacterAction?.Invoke(action, false);
+        }
+    }
+
+    private void CheckMouseButton(int button, CharacterAction action)
+    {
+        if (Input.GetMouseButtonDown(button))
+        {
+            OnCharacterAction?.Invoke(action, true);
+        }
+        else if (Input.GetMouseButtonUp(button))
         {
             OnCharacterAction?.Invoke(action, false);
         }

@@ -13,13 +13,16 @@ public class EssenceMovement : MonoBehaviour
 
     private CharacterController _characterController;
 
-    [Space]
+    [Header("Speed ")]
     [SerializeField, Range(0.001f, 0.1f)] private float _speedNormal = 0.01f;
     [SerializeField, Range(0.001f, 0.1f)] private float _speedRun = 0.018f;
-    [SerializeField, Range(0.001f, 0.1f)] private float _speedSit = 0.006f;
+    [SerializeField, Range(0.001f, 0.1f)] private float _speedSit = 0.005f;
+    [SerializeField, Range(0.001f, 0.1f)] private float _speedUse = 0.007f;
+    
+    [Header("Force")]
     [SerializeField, Range(0.01f, 1f)] private float _forceJump = 0.1f;
 
-    [Space]
+    [Header("Expenses stamina")]
     [SerializeField, Range(0.1f, 2f)] private float _jumpStamina = 1f;
 
     private float _currentSpeed = 0;
@@ -84,6 +87,8 @@ public class EssenceMovement : MonoBehaviour
                 return _speedSit;
             case EssenceState.Run:
                 return _speedRun;
+            case EssenceState.Use:
+                return _speedUse;
             default:
                 return _speedNormal;
         }

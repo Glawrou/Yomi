@@ -132,12 +132,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 284987104}
+  - component: {fileID: 284987106}
   - component: {fileID: 284987103}
   - component: {fileID: 284987102}
   - component: {fileID: 284987101}
   - component: {fileID: 284987105}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: SelectableObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -214,7 +215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 284987100}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -73.113716, y: -4.4770637, z: -12.609388}
+  m_LocalPosition: {x: -72.46, y: -4.4770637, z: -12.609388}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -237,6 +238,64 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &284987106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284987100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a5cc769e610264cb2e4d72edef8cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 284987105}
+--- !u!1 &462170746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 462170747}
+  - component: {fileID: 462170748}
+  m_Layer: 0
+  m_Name: Hands
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &462170747
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462170746}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.2, z: 1.44}
+  m_LocalScale: {x: 1, y: 0.55865926, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 963194228}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &462170748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462170746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6deae8547394a46428d1fb5c9b66933f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _forceThrow: 250
 --- !u!1 &551773663
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,6 +329,7 @@ MonoBehaviour:
   _sit: 306
   _use: 101
   _run: 304
+  _throwMouseButton: 0
   _sensitivity: 300
 --- !u!4 &551773665
 Transform:
@@ -655,7 +715,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1.79, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 462170747}
   m_Father: {fileID: 1091247099}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -682,12 +743,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1048901718}
+  - component: {fileID: 1048901719}
   - component: {fileID: 1048901717}
   - component: {fileID: 1048901716}
   - component: {fileID: 1048901715}
   - component: {fileID: 1048901714}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: SelectableObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -780,13 +842,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048901713}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -73.113716, y: -4.4770637, z: 8.480612}
+  m_LocalPosition: {x: -74.26, y: -4.4770637, z: 8.480612}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1855450954}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1048901719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048901713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a5cc769e610264cb2e4d72edef8cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 1048901714}
 --- !u!1 &1048923503
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,6 +1024,7 @@ MonoBehaviour:
   _speedNormal: 0.01
   _speedRun: 0.018
   _speedSit: 0.006
+  _speedUse: 0.007
   _forceJump: 0.04
   _jumpStamina: 1.2
 --- !u!114 &1091247102
@@ -996,6 +1072,7 @@ MonoBehaviour:
   _characterController: {fileID: 1091247100}
   _rotate: {fileID: 1091247103}
   _movement: {fileID: 1091247101}
+  _hands: {fileID: 462170748}
 --- !u!1 &1315108601
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,5 +3,6 @@ public enum CharacterAction
     Jump,
     Sit,
     Use,
-    Run
+    Run,
+    Throw
 }
