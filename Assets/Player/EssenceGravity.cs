@@ -26,7 +26,7 @@ public class EssenceGravity : MonoBehaviour
     public void UpdateHandler()
     {
         _characterController.Move(Vector3.up * _velocity);
-        if (_groundCheck.IsGround && _velocity < StartVelocity)
+        if (_groundCheck.IsGrounded && _velocity < StartVelocity)
         {
             _velocity = StartVelocity;
             return;

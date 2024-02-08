@@ -1,25 +1,34 @@
 using UnityEngine;
+using System;
+using System.Collections;
 
 public class EssenceMovement : MonoBehaviour
 {
+    public event Action<bool> OnChangeFly;
+    public event Action<bool> OnChangeRun;
+
     [SerializeField] private EssenceGravity _gravity;
-    [SerializeField] private Stamina _stamina;
-    [SerializeField] private GroundCheck _groundCheck;
+    [SerializeField] public Stamina _stamina;
+    [SerializeField] public GroundCheck _groundCheck;
 
     private CharacterController _characterController;
 
     [Space]
     [SerializeField, Range(0.001f, 0.1f)] private float _speedNormal = 0.01f;
     [SerializeField, Range(0.001f, 0.1f)] private float _speedRun = 0.018f;
+    [SerializeField, Range(0.001f, 0.1f)] private float _speedSit = 0.006f;
     [SerializeField, Range(0.01f, 1f)] private float _forceJump = 0.1f;
 
     [Space]
     [SerializeField, Range(0.1f, 2f)] private float _jumpStamina = 1f;
 
-    private bool _isRun = false;
+    private float _currentSpeed = 0;
+    private EssenceState _essenceState = EssenceState.None;
 
     public void Initialization(CharacterController characterController)
     {
+        _groundCheck.OnChangeGrounded += ChangeGroundHandler;
+        _currentSpeed = _speedNormal;
         _gravity.Initialization(characterController);
         _characterController = characterController;
         _stamina.SetMaxStamina();
@@ -27,34 +36,34 @@ public class EssenceMovement : MonoBehaviour
 
     public void UpdateHandler()
     {
-        _stamina.Update(_isRun);
+        var isRun = _essenceState == EssenceState.Run;
+        _stamina.Update(isRun);
         _gravity.UpdateHandler();
+        if (isRun && !_stamina.IsStamina)
+        {
+            OnChangeRun?.Invoke(false);
+        }
     }
 
     public void MoveInputHandler(Vector2 vector)
     {
         var move = transform.right * vector.x + transform.forward * vector.y;
-        _characterController.Move(move * GetSpeed());
+        _characterController.Move(move * _currentSpeed);
     }
 
-    private float GetSpeed()
+    public void EssenceStateHandler(EssenceState state)
     {
-        if (_stamina.IsStamina)
+        _essenceState = state;
+        _currentSpeed = GetSpeed(state);
+        if (state == EssenceState.Run && _stamina.IsCanUseStamina)
         {
-            return _isRun ? _speedRun : _speedNormal;
+            OnChangeRun?.Invoke(true);
         }
-
-        return _speedNormal;
-    }
-
-    public void SetRun(bool isRun)
-    {
-        _isRun = isRun && _stamina.IsCanUseStamina;
     }
 
     public void Jump()
     {
-        if (!_groundCheck.IsGround)
+        if (!_groundCheck.IsGrounded)
         {
             return;
         }
@@ -65,5 +74,23 @@ public class EssenceMovement : MonoBehaviour
         }
 
         _gravity.SetVelocity(_forceJump);
+    }
+
+    private float GetSpeed(EssenceState state)
+    {
+        switch (state)
+        {
+            case EssenceState.Sit:
+                return _speedSit;
+            case EssenceState.Run:
+                return _speedRun;
+            default:
+                return _speedNormal;
+        }
+    }
+
+    private void ChangeGroundHandler(bool isGround)
+    {
+        OnChangeFly?.Invoke(!isGround);
     }
 }
