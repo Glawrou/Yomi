@@ -7,6 +7,9 @@ public class Essence : MonoBehaviour
 {
     public event Action<EssenceState> OnChangeState;
 
+    [SerializeField] private PlayerUI _playerUI;
+
+    [Space]
     [SerializeField] private ControlInput _controlInput;
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private LookRotate _rotate;
@@ -25,6 +28,7 @@ public class Essence : MonoBehaviour
         InitRotate();
         InitMovement();
         InitHends();
+        InitUI();
     }
 
     private void InitRotate()
@@ -37,6 +41,7 @@ public class Essence : MonoBehaviour
     {
         OnChangeState += _movement.EssenceStateHandler;
         _movement.OnChangeFly += (isFly) => SetState(isFly ? EssenceState.Fly : EssenceState.None);
+        _movement.OnChangeRun += (isRun) => SetState(isRun ? EssenceState.Run : EssenceState.None);
         _movement.Initialization(_characterController);
         _controlInput.OnMove += _movement.MoveInputHandler;
     }
@@ -44,6 +49,11 @@ public class Essence : MonoBehaviour
     private void InitHends()
     {
         _hands.OnChangeUse += (active) => SetState(active ? EssenceState.Use : EssenceState.None);
+    }
+
+    private void InitUI()
+    {
+        _movement.OnChangeStamina += _playerUI.SetStamina;
     }
 
     private void Update()

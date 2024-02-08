@@ -4,6 +4,7 @@ using System.Collections;
 
 public class EssenceMovement : MonoBehaviour
 {
+    public event Action<float> OnChangeStamina;
     public event Action<bool> OnChangeFly;
     public event Action<bool> OnChangeRun;
 
@@ -31,6 +32,7 @@ public class EssenceMovement : MonoBehaviour
     public void Initialization(CharacterController characterController)
     {
         _groundCheck.OnChangeGrounded += ChangeGroundHandler;
+        _stamina.OnChangeStamina += (value) => OnChangeStamina?.Invoke(value);
         _currentSpeed = _speedNormal;
         _gravity.Initialization(characterController);
         _characterController = characterController;

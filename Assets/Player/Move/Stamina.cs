@@ -4,7 +4,9 @@ using UnityEngine;
 [Serializable]
 public class Stamina
 {
-    public float Value => _stamina;
+    public event Action<float> OnChangeStamina;
+
+    public float Value => _stamina / MaxStamina;
     public bool IsCanUseStamina => MinStaminaForUse < _stamina;
     public bool IsStamina => _stamina > 0;
 
@@ -19,7 +21,7 @@ public class Stamina
         var stamina = _stamina - value;
         if (stamina > 0)
         {
-            _stamina = stamina;
+            SetStamina(stamina);
             return true;
         }
 
@@ -28,12 +30,17 @@ public class Stamina
 
     public void SetMaxStamina()
     {
-        _stamina = MaxStamina;
+        SetStamina(MaxStamina);
     }
 
     public void Update(bool isUse)
     {
-        _stamina += isUse ? -Time.deltaTime : Time.deltaTime * AddStaminaFactor;
-        _stamina = Mathf.Clamp(_stamina, 0, MaxStamina);
+        SetStamina(_stamina + (isUse ? -Time.deltaTime : Time.deltaTime * AddStaminaFactor));
+    }
+
+    private void SetStamina(float value)
+    {
+        _stamina = Mathf.Clamp(value, 0, MaxStamina);
+        OnChangeStamina?.Invoke(Value);
     }
 }
