@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerInputPc : ControlInput
 {
+    public static bool IsActive = true;
+
     public float Sensitivity
     {
         get
@@ -34,6 +36,11 @@ public class PlayerInputPc : ControlInput
 
     private void Update()
     {
+        if (!IsActive)
+        {
+            return;
+        }
+
         MouseInput();
         MoveInput();
         KeyInput();

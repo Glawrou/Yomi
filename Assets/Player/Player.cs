@@ -31,6 +31,18 @@ public class Player : MonoBehaviour
         InitUI();
     }
 
+    public void StartDialog(SociableÑharacter sociableÑharacters)
+    {
+        _rotate.LockAt(sociableÑharacters.Head.transform);
+        _playerUI.DialogWindow.Open(sociableÑharacters.DialogData);
+        _playerUI.DialogWindow.OnEndDialog += () => EndDialog(sociableÑharacters);
+    }
+
+    public void EndDialog(SociableÑharacter sociableÑharacters)
+    {
+        sociableÑharacters.Dead();
+    }
+
     private void InitRotate()
     {
         OnChangeState += (state) => SetSit(state == EssenceState.Sit);

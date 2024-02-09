@@ -22,6 +22,11 @@ public class LookRotate : MonoBehaviour
 
     public void SetSit(bool isActive) => _head.Sit(isActive);
 
+    public void LockAt(Transform transform)
+    {
+        _head.transform.LookAt(transform);
+    }
+
     public void MouseInputHandler(Vector2 vector)
     {
         transform.Rotate(Vector3.up * vector.x);

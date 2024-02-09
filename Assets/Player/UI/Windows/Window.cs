@@ -15,7 +15,6 @@ public abstract class Window : MonoBehaviour
 
     protected void Awake()
     {
-        Close();
         _background.OnClick += Close;
     }
 
@@ -49,11 +48,13 @@ public abstract class Window : MonoBehaviour
         if (isActive)
         {
             _openedWindow = this;
+            PlayerInputPc.IsActive = false;
             OnOpen?.Invoke();
         }
         else
         {
             _openedWindow = null;
+            PlayerInputPc.IsActive = true;
             OnClose?.Invoke();
         }
     }

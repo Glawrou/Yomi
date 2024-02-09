@@ -7,6 +7,11 @@ public class Game : MonoBehaviour
     [SerializeField] private MenuWindow _menuWindow;
     [SerializeField] private PlayerInputPc _playerInput;
 
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     private void Start()
     {
         _menuWindow.OnOpen += PauseGame;
