@@ -11,7 +11,6 @@ public class StaminaView : MonoBehaviour
     public void SetValue(float value)
     {
         value = (1 - Mathf.Clamp(value, 0, 1)) * _factor;
-        Debug.Log(value);
         _image.color = new Color(
             _image.color.r, 
             _image.color.g, 

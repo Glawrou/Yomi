@@ -11,6 +11,8 @@ public class LookRotate : MonoBehaviour
         }
     }
 
+    public bool IsSit => _head.IsSit;
+
     [SerializeField] private ClampData _clampYCamera;
     [SerializeField] private Head _head;
 

@@ -60,10 +60,6 @@ public class EssenceMovement : MonoBehaviour
     {
         _essenceState = state;
         _currentSpeed = GetSpeed(state);
-        if (state == EssenceState.Run && _stamina.IsCanUseStamina)
-        {
-            OnChangeRun?.Invoke(true);
-        }
     }
 
     public void Jump()

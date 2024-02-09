@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Essence : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public event Action<EssenceState> OnChangeState;
 
@@ -33,7 +33,7 @@ public class Essence : MonoBehaviour
 
     private void InitRotate()
     {
-        OnChangeState += (state) => _rotate.SetSit(state == EssenceState.Sit);
+        OnChangeState += (state) => SetSit(state == EssenceState.Sit);
         _controlInput.OnRotate += _rotate.MouseInputHandler;
     }
 
@@ -59,6 +59,16 @@ public class Essence : MonoBehaviour
     private void Update()
     {
         _movement.UpdateHandler();
+    }
+
+    private void SetSit(bool isSit)
+    {
+        if (isSit == _rotate.IsSit)
+        {
+            return;
+        }
+
+        _rotate.SetSit(isSit);
     }
 
     private void SetState(EssenceState state)
@@ -143,6 +153,18 @@ public class Essence : MonoBehaviour
         _hands.Throw();
     }
 
+    private void MenuHandler(bool isActive)
+    {
+        if (!isActive)
+        {
+            return;
+        }
+
+        var window = _playerUI.MenuWindow;
+        Action action = window.IsOpen ? window.Close : window.Open;
+        action?.Invoke();
+    }
+
     private void CharacterActionHandler(CharacterAction action, bool isActive)
     {
         switch (action)
@@ -161,6 +183,9 @@ public class Essence : MonoBehaviour
                 break;
             case CharacterAction.Throw:
                 ThrowHandler(isActive);
+                break;
+            case CharacterAction.Menu:
+                MenuHandler(isActive);
                 break;
             default:
                 break;

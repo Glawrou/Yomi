@@ -3,6 +3,18 @@ using UnityEngine;
 
 public class PlayerInputPc : ControlInput
 {
+    public float Sensitivity
+    {
+        get
+        {
+            return _sensitivity / MaxSensitivity;
+        }
+        set
+        {
+            _sensitivity = MaxSensitivity * value;
+        }
+    }
+
     public override event Action<Vector2> OnRotate;
     public override event Action<Vector2> OnMove;
     public override event Action<CharacterAction, bool> OnCharacterAction;
@@ -11,16 +23,14 @@ public class PlayerInputPc : ControlInput
     [SerializeField] private KeyCode _sit;
     [SerializeField] private KeyCode _use;
     [SerializeField] private KeyCode _run;
+    [SerializeField] private KeyCode _menu;
 
     [Space]
     [SerializeField] private int _throwMouseButton;
 
-    [SerializeField, Range(1f, 1000f)] private float _sensitivity = 50;
+    [SerializeField, Range(1f, MaxSensitivity)] private float _sensitivity = 50;
 
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
+    private const float MaxSensitivity = 1000;
 
     private void Update()
     {
@@ -49,6 +59,7 @@ public class PlayerInputPc : ControlInput
         CheckKeyCode(_sit, CharacterAction.Sit);
         CheckKeyCode(_use, CharacterAction.Use);
         CheckKeyCode(_run, CharacterAction.Run);
+        CheckKeyCode(_menu, CharacterAction.Menu);
         CheckMouseButton(_throwMouseButton, CharacterAction.Throw);
     }
 

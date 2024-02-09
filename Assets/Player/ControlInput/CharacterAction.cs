@@ -4,5 +4,6 @@ public enum CharacterAction
     Sit,
     Use,
     Run,
-    Throw
+    Throw,
+    Menu
 }

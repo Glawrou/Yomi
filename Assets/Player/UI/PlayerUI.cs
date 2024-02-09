@@ -6,5 +6,7 @@ public class PlayerUI : MonoBehaviour
 {
     [SerializeField] private StaminaView _staminaView;
 
+    [field: SerializeField] public MenuWindow MenuWindow { get; private set; }
+
     public void SetStamina(float value) => _staminaView.SetValue(value);
 }
