@@ -1,10 +1,13 @@
 using UnityEngine;
+using System;
 
 public class CollectibleObject : SelectableObject
 {
+    public event Action<CollectibleObject> OnCollect;
+
     public override void Drop()
     {
-        Destroy(gameObject);
+        Collect();
     }
 
     public override void PickUp(Transform handsT)
@@ -15,6 +18,12 @@ public class CollectibleObject : SelectableObject
 
     public override void Throw(float force)
     {
+        Collect();
+    }
+
+    public void Collect()
+    {
+        OnCollect?.Invoke(this);
         Destroy(gameObject);
     }
 }

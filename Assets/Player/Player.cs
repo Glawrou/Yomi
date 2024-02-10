@@ -7,10 +7,10 @@ public class Player : MonoBehaviour
 {
     public event Action<EssenceState> OnChangeState;
 
-    [SerializeField] private PlayerUI _playerUI;
+    [field: SerializeField] public ControlInput ControlInput { get; private set; }
+    [field: SerializeField] public PlayerUI PlayerUI { get; private set; }
 
     [Space]
-    [SerializeField] private ControlInput _controlInput;
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private LookRotate _rotate;
     [SerializeField] private EssenceMovement _movement;
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        _controlInput.OnCharacterAction += CharacterActionHandler;
+        ControlInput.OnCharacterAction += CharacterActionHandler;
     }
 
     private void Start()
@@ -31,11 +31,14 @@ public class Player : MonoBehaviour
         InitUI();
     }
 
+    public void SetCollect(int collect, int max) => PlayerUI.SetNotionCollect(collect, max);
+    public void SetViewNotion(bool isView) => PlayerUI.SetNotionView(isView);
+
     public void StartDialog(SociableÑharacter sociableÑharacters)
     {
         _rotate.LockAt(sociableÑharacters.Head.transform);
-        _playerUI.DialogWindow.Open(sociableÑharacters.DialogData);
-        _playerUI.DialogWindow.OnEndDialog += () => EndDialog(sociableÑharacters);
+        PlayerUI.DialogWindow.Open(sociableÑharacters.DialogData);
+        PlayerUI.DialogWindow.OnEndDialog += () => EndDialog(sociableÑharacters);
     }
 
     public void EndDialog(SociableÑharacter sociableÑharacters)
@@ -46,7 +49,7 @@ public class Player : MonoBehaviour
     private void InitRotate()
     {
         OnChangeState += (state) => SetSit(state == EssenceState.Sit);
-        _controlInput.OnRotate += _rotate.MouseInputHandler;
+        ControlInput.OnRotate += _rotate.MouseInputHandler;
     }
 
     private void InitMovement()
@@ -55,7 +58,7 @@ public class Player : MonoBehaviour
         _movement.OnChangeFly += (isFly) => SetState(isFly ? EssenceState.Fly : EssenceState.None);
         _movement.OnChangeRun += (isRun) => SetState(isRun ? EssenceState.Run : EssenceState.None);
         _movement.Initialization(_characterController);
-        _controlInput.OnMove += _movement.MoveInputHandler;
+        ControlInput.OnMove += _movement.MoveInputHandler;
     }
 
     private void InitHends()
@@ -65,7 +68,7 @@ public class Player : MonoBehaviour
 
     private void InitUI()
     {
-        _movement.OnChangeStamina += _playerUI.SetStamina;
+        _movement.OnChangeStamina += PlayerUI.SetStamina;
     }
 
     private void Update()
@@ -172,7 +175,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        var window = _playerUI.MenuWindow;
+        var window = PlayerUI.MenuWindow;
         Action action = window.IsOpen ? window.Close : window.Open;
         action?.Invoke();
     }

@@ -16,7 +16,7 @@ public class LookRotate : MonoBehaviour
     [SerializeField] private ClampData _clampYCamera;
     [SerializeField] private Head _head;
 
-    private const float _distanceDetected = 3;
+    private const float _distanceDetected = 4;
     private float _xRotation = 0;
     private RaycastHit _hit;
 

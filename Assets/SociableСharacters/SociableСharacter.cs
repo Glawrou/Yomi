@@ -9,12 +9,13 @@ public class SociableСharacter : MonoBehaviour
 
     [SerializeField] public DeadEffect _deadEffect;
     [SerializeField] private ColliderTrigger _colliderTrigger;
+    [SerializeField] private LockAt _lockAt;
     
     private const string PlayerTag = "Player";
 
     private void Awake()
     {
-        _colliderTrigger.OnTrigger += TriggerHandler;
+        _colliderTrigger.OnEnterTrigger += TriggerHandler;
     }
 
     public void Dead()
@@ -27,6 +28,7 @@ public class SociableСharacter : MonoBehaviour
     {
         if (PlayerTag == player.tag)
         {
+            _lockAt.SetTarget(player.transform);
             var pla = player.GetComponent<Player>();
             pla.StartDialog(this);
         }
