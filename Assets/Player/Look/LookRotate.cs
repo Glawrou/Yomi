@@ -17,6 +17,9 @@ public class LookRotate : MonoBehaviour
     [SerializeField] private Head _head;
 
     private const float _distanceDetected = 4;
+    private const float _distanceDetectedMonsters = 100;
+    private const string MonsterTag = "Monster";
+
     private float _xRotation = 0;
     private RaycastHit _hit;
 
@@ -34,11 +37,22 @@ public class LookRotate : MonoBehaviour
         _xRotation = Mathf.Clamp(_xRotation, _clampYCamera.Min, _clampYCamera.Max);
         _head.transform.localRotation = Quaternion.Euler(Vector3.right * _xRotation);
         DetectedObject();
+        DetectedObjectMonster();
     }
 
     private void DetectedObject()
     {
         var ray = new Ray(_head.transform.position, _head.transform.forward * _distanceDetected);
         Physics.Raycast(ray, out _hit, _distanceDetected);
+    }
+
+    private void DetectedObjectMonster()
+    {
+        var ray = new Ray(_head.transform.position, _head.transform.forward * _distanceDetectedMonsters);
+        Physics.Raycast(ray, out var hit, _distanceDetectedMonsters);
+        if (hit.collider && hit.collider.tag == MonsterTag)
+        {
+            hit.collider.GetComponent<Child>().Out();
+        }
     }
 }

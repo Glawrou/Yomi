@@ -16,6 +16,7 @@ public class Elevator : MonoBehaviour
     [SerializeField] private ColliderTrigger _triggerPlayerUnder;
     [SerializeField] private ColliderTrigger _triggerPlayerOut;
     [SerializeField] private GroundCheck _groundCheck;
+    [SerializeField] private AudioSource _bell;
     [SerializeField] private float _speed = 1;
 
     private const string AnimTrigger = "IsOpen";
@@ -142,6 +143,6 @@ public class Elevator : MonoBehaviour
 
     public void OpenDoorHandler()
     {
-
+        _bell.Play();
     }
 }
