@@ -5,7 +5,8 @@ using System;
 
 public class Elevator : MonoBehaviour
 {
-    public event Action OnOut;
+    public event Action OnElevatorOut;
+    public event Action OnPlayerOut;
     public event Action OnCloseDoor;
     public event Action OnPlayerEnter;
     public event Action OnPlayerExit;
@@ -13,6 +14,7 @@ public class Elevator : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private ColliderTrigger _triggerPlayerIn;
     [SerializeField] private ColliderTrigger _triggerPlayerUnder;
+    [SerializeField] private ColliderTrigger _triggerPlayerOut;
     [SerializeField] private GroundCheck _groundCheck;
     [SerializeField] private float _speed = 1;
 
@@ -31,13 +33,14 @@ public class Elevator : MonoBehaviour
         _triggerPlayerIn.OnExitTrigger += ElevatorExitHandler;
         _triggerPlayerUnder.OnEnterTrigger += UnderElevatorEnterHandler;
         _triggerPlayerUnder.OnExitTrigger += UnderElevatorExitHandler;
+        _triggerPlayerOut.OnExitTrigger += (obj) => OnPlayerOut?.Invoke();
     }
 
     public Player Spawn(Player player)
     {
         if (player)
         {
-            OnPlayerExit += () => StartCoroutine(OutProcess());
+            OnPlayerOut += () => StartCoroutine(OutProcess());
         }
         else
         {
@@ -77,7 +80,7 @@ public class Elevator : MonoBehaviour
             yield return null;
         }
 
-        OnOut?.Invoke();
+        OnElevatorOut?.Invoke();
         if (!IsPlayerInElevator)
         {
             Destroy(gameObject);

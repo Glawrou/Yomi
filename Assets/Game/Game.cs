@@ -10,16 +10,18 @@ public class Game : MonoBehaviour
     [SerializeField] private string _nextLevel;
 
     [Space]
-    [SerializeField] private List<CollectibleObject> _collectibleObjects;
+    [SerializeField] protected List<CollectibleObject> _collectibleObjects;
 
     private PlayerInputPc _playerInput;
-    private PlayerUI _playerUI;
+    protected PlayerUI _playerUI;
     private Player _player;
     private MenuWindow _menuWindow => _playerUI.MenuWindow;
 
     private const int MaxCollect = 5;
+    private const int HeightSpawnPlayer = 5;
+    private const int HeightSpawnElevator = 50;
 
-    private void Awake()
+    protected void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
         foreach (var item in _collectibleObjects)
@@ -28,7 +30,7 @@ public class Game : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected void Start()
     {
         InitPlayer();
         _menuWindow.OnOpen += PauseGame;
@@ -45,7 +47,7 @@ public class Game : MonoBehaviour
 
     private Player SpawnPlayer()
     {
-        return SpawnElevator(_playerPrifab, Vector3.up * 3);
+        return SpawnElevator(_playerPrifab, Vector3.up * HeightSpawnPlayer);
     }
 
     private Player SpawnElevator(Player player, Vector3 pos)
@@ -85,7 +87,7 @@ public class Game : MonoBehaviour
     {
         if (_collectibleObjects.Count == 1)
         {
-            SpawnElevator(_player.transform.position + Vector3.up * 100).OnCloseDoor += LoadNextLevel;
+            SpawnElevator(_player.transform.position + Vector3.up * HeightSpawnElevator).OnCloseDoor += LoadNextLevel;
         }
 
         _collectibleObjects.Remove(collectibleObject);

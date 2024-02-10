@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SociableСharacter : MonoBehaviour
 {
+    public event Action OnEndDialog;
+
     [field: SerializeField] public DialogData DialogData { get; private set; }
     [field: SerializeField] public Transform Head { get; private set; }
 
@@ -20,6 +23,7 @@ public class SociableСharacter : MonoBehaviour
 
     public void Dead()
     {
+        OnEndDialog?.Invoke();
         Instantiate(_deadEffect, transform.position, Quaternion.identity, null);
         Destroy(gameObject);
     }
