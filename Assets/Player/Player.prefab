@@ -640,7 +640,7 @@ MonoBehaviour:
   _speedRun: 10
   _speedSit: 2
   _speedUse: 2
-  _forceJump: 2
+  _forceJump: 0.05
   _jumpStamina: 1.2
 --- !u!114 &3976520588809877771
 MonoBehaviour:
@@ -888,7 +888,7 @@ MonoBehaviour:
   _sit: 306
   _use: 101
   _run: 304
-  _menu: 9
+  _menu: 27
   _throwMouseButton: 0
   _sensitivity: 300
 --- !u!1 &3976520589724420239

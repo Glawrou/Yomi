@@ -22,6 +22,7 @@ public abstract class Monster : MonoBehaviour
     private void Start()
     {
         _essenceMovement.Initialization(_characterController);
+        _colliderTrigger.OnEnterTrigger += KillPlayer;
     }
 
     public void Initialization(Player player)
@@ -38,7 +39,7 @@ public abstract class Monster : MonoBehaviour
         }
 
         SetRotateY(_player.transform.position);
-        _essenceMovement.MoveInputHandler((transform.position - _player.transform.position).normalized * _speedMove);
+        _essenceMovement.MoveInputHandler(-Vector2.right * _speedMove);
     }
 
     private void SetRotateY(Vector3 targetCoordinates)
@@ -55,7 +56,7 @@ public abstract class Monster : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void KillPlayer(GameObject obj)
+    private void KillPlayer(GameObject obj)
     {
         if (obj.tag != Player.PlayerTag)
         {

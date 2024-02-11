@@ -6,6 +6,8 @@ public class Level2 : Game
 {
     [SerializeField] private Child _childPrefab;
 
+    private const float DistancePlayerSpawn = 20f;
+    private const float TimeBetweenSpawns =25f;
     private Child _currentChild;
 
     private new void Start()
@@ -18,15 +20,9 @@ public class Level2 : Game
     {
         while (true)
         {
-            yield return new WaitForSeconds(25f);
-            if (_currentChild)
-            {
-                continue;
-            }
-
-            _currentChild = Instantiate(_childPrefab, _player.transform.forward * -20f, Quaternion.identity, null);
+            yield return new WaitForSeconds(TimeBetweenSpawns);
+            _currentChild = Instantiate(_childPrefab, _player.transform.forward * -DistancePlayerSpawn, Quaternion.identity, null);
             _currentChild.Initialization(_player);
-            _currentChild.OnDead += () => _currentChild = null;
         }
     }
 }

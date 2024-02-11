@@ -178,6 +178,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8013726956916392136}
     - target: {fileID: 1440468148, guid: 2458d7aedb4b3bf489169658a3f0abc2, type: 3}
+      propertyPath: _colliderTrigger
+      value: 
+      objectReference: {fileID: 5788086455072143098}
+    - target: {fileID: 1440468148, guid: 2458d7aedb4b3bf489169658a3f0abc2, type: 3}
       propertyPath: _essenceMovement
       value: 
       objectReference: {fileID: 8013726956916392137}

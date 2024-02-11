@@ -1,6 +1,5 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Linq;
+using UnityEngine;
 
 public class Compass : MonoBehaviour
 {
@@ -26,17 +25,10 @@ public class Compass : MonoBehaviour
         var nearestCollectible = GetNearest(_collectibleObject);
         if (nearestCollectible != null)
         {
-            // Определяем направление к ближайшему объекту
             var direction = (nearestCollectible.position - _head.transform.position).normalized;
-
-            // Определяем угол поворота относительно оси Z с учетом поворота головы
             var targetAngle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
-            targetAngle += _head.transform.eulerAngles.y; // Учитываем поворот головы
-
-            // Создаем новую ротацию только по оси Z
+            targetAngle += _head.transform.eulerAngles.y;
             var targetRotation = Quaternion.Euler(0, 0, targetAngle + _offset);
-
-            // Устанавливаем ротацию объекта UI
             _rectTransform.localRotation = targetRotation;
         }
     }

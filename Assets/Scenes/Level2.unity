@@ -174,7 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _elevatorPrifab: {fileID: 1302740396, guid: e6414e29d76781d45802965350840609, type: 3}
   _playerPrifab: {fileID: 5539840377895264893, guid: 9f0b9c6c2bb5c2848be5def9d324169d, type: 3}
-  _nextLevel: Menu
+  _nextLevel: Level3
   _mixer: {fileID: 24100000, guid: 2b7ea9d6cd69aeb4e94f2cc250751850, type: 2}
   _collectibleObjects:
   - {fileID: 2136652337}
