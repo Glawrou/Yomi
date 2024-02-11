@@ -175,6 +175,7 @@ MonoBehaviour:
   _elevatorPrifab: {fileID: 1302740396, guid: e6414e29d76781d45802965350840609, type: 3}
   _playerPrifab: {fileID: 4416995558587092998, guid: d4045e46d8a03f74ca867807f48fac03, type: 3}
   _nextLevel: Level2
+  _mixer: {fileID: 24100000, guid: 2b7ea9d6cd69aeb4e94f2cc250751850, type: 2}
   _collectibleObjects:
   - {fileID: 2136652337}
   - {fileID: 1003007720}

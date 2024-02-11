@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Child : MonoBehaviour
+public class Child : Monster
 {
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private float _speed;
+    [SerializeField] private float _speedOut = 5;
 
     private const float Height = 300;
 
-    public void Out()
+    private void Out()
     {
         _audioSource.Play();
+        _essenceGravity.SetUseGravity(false);
         StartCoroutine(OutProcess());
     }
 
@@ -19,10 +20,15 @@ public class Child : MonoBehaviour
     {
         while (transform.position.y < Height)
         {
-            transform.position += Vector3.up * _speed * Time.deltaTime;
+            transform.position += Vector3.up * _speedOut * Time.deltaTime;
             yield return null;
         }
 
-        Destroy(gameObject);
+        Dead();
+    }
+
+    public override void Detected()
+    {
+        Out();
     }
 }

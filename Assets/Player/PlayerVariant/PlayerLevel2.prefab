@@ -7,22 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3976520588809877768, guid: 40b8b0899c5a13048a744d856b69229f, type: 3}
-      propertyPath: _speedRun
-      value: 0.022
-      objectReference: {fileID: 0}
-    - target: {fileID: 3976520588809877768, guid: 40b8b0899c5a13048a744d856b69229f, type: 3}
-      propertyPath: _speedNormal
-      value: 0.014
-      objectReference: {fileID: 0}
-    - target: {fileID: 3976520588809877768, guid: 40b8b0899c5a13048a744d856b69229f, type: 3}
-      propertyPath: _stamina.<MaxStamina>k__BackingField
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3976520588809877768, guid: 40b8b0899c5a13048a744d856b69229f, type: 3}
-      propertyPath: _stamina.<AddStaminaFactor>k__BackingField
-      value: 0.8
-      objectReference: {fileID: 0}
     - target: {fileID: 3976520588809877774, guid: 40b8b0899c5a13048a744d856b69229f, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -8,14 +8,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3976520588809877768, guid: 40b8b0899c5a13048a744d856b69229f, type: 3}
-      propertyPath: _speedRun
-      value: 0.022
-      objectReference: {fileID: 0}
-    - target: {fileID: 3976520588809877768, guid: 40b8b0899c5a13048a744d856b69229f, type: 3}
-      propertyPath: _speedNormal
-      value: 0.014
-      objectReference: {fileID: 0}
-    - target: {fileID: 3976520588809877768, guid: 40b8b0899c5a13048a744d856b69229f, type: 3}
       propertyPath: _stamina.<MaxStamina>k__BackingField
       value: 3
       objectReference: {fileID: 0}
@@ -82,6 +74,10 @@ PrefabInstance:
     - target: {fileID: 3976520589218680710, guid: 40b8b0899c5a13048a744d856b69229f, type: 3}
       propertyPath: m_BackGroundColor.r
       value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231287113003757416, guid: 40b8b0899c5a13048a744d856b69229f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40b8b0899c5a13048a744d856b69229f, type: 3}

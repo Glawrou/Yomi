@@ -6,9 +6,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public event Action<EssenceState> OnChangeState;
+    public event Action OnDead;
 
     [field: SerializeField] public ControlInput ControlInput { get; private set; }
     [field: SerializeField] public PlayerUI PlayerUI { get; private set; }
+
+    public const string PlayerTag = "Player";
 
     [Space]
     [SerializeField] private CharacterController _characterController;
@@ -29,6 +32,11 @@ public class Player : MonoBehaviour
         InitMovement();
         InitHends();
         InitUI();
+    }
+
+    public void Kill()
+    {
+        OnDead?.Invoke();
     }
 
     public void SetCollect(int collect, int max) => PlayerUI.SetNotionCollect(collect, max);

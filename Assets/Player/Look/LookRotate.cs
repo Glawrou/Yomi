@@ -52,7 +52,7 @@ public class LookRotate : MonoBehaviour
         Physics.Raycast(ray, out var hit, _distanceDetectedMonsters);
         if (hit.collider && hit.collider.tag == MonsterTag)
         {
-            hit.collider.GetComponent<Child>().Out();
+            hit.collider.GetComponent<Monster>().Detected();
         }
     }
 }

@@ -7,6 +7,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private StaminaView _staminaView;
     [SerializeField] private NotionView _notionView;
 
+    [field: SerializeField] public Compass Compass { get; private set; }
     [field: SerializeField] public MenuWindow MenuWindow { get; private set; }
     [field: SerializeField] public DialogWindow DialogWindow { get; private set; }
 

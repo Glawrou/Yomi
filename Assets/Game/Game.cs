@@ -2,24 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class Game : MonoBehaviour
 {
     [SerializeField] private Elevator _elevatorPrifab;
     [SerializeField] private Player _playerPrifab;
     [SerializeField] private string _nextLevel;
+    [SerializeField] private AudioMixer _mixer;
 
     [Space]
     [SerializeField] protected List<CollectibleObject> _collectibleObjects;
 
     private PlayerInputPc _playerInput;
     protected PlayerUI _playerUI;
-    private Player _player;
+    protected Player _player;
     private MenuWindow _menuWindow => _playerUI.MenuWindow;
 
     private const int MaxCollect = 5;
     private const int HeightSpawnPlayer = 5;
     private const int HeightSpawnElevator = 50;
+    private const string DeadScene = "Dead";
+    private const float SoundValue = -80f;
 
     protected void Awake()
     {
@@ -33,6 +37,7 @@ public class Game : MonoBehaviour
     protected void Start()
     {
         InitPlayer();
+        InitMenu();
         _menuWindow.OnOpen += PauseGame;
         _menuWindow.OnClose += ResumeGame;
         _menuWindow.OnExitGame += GameExit;
@@ -43,6 +48,21 @@ public class Game : MonoBehaviour
         _player = SpawnPlayer();
         _playerInput = _player.ControlInput as PlayerInputPc;
         _playerUI = _player.PlayerUI;
+        _player.OnDead += LoadDeadScene;
+        _playerUI.Compass.Initialization(_collectibleObjects.ToArray());
+    }
+
+    private void InitMenu()
+    {
+        _menuWindow.SetSensitivity(_playerInput.Sensitivity);
+        _mixer.GetFloat("Sound", out var soundValue);
+        _menuWindow.SetSound(soundValue);
+        _mixer.GetFloat("Music", out var soundMusic);
+        _menuWindow.SetMusic(soundMusic);
+        _menuWindow.OnSensitivity += SetSensitivity;
+        _menuWindow.OnMusic += SetMusic;
+        _menuWindow.OnSound += SetSound;
+        _menuWindow.OnBrightness += SetBrightness;
     }
 
     private Player SpawnPlayer()
@@ -66,6 +86,21 @@ public class Game : MonoBehaviour
     private void SetSensitivity(float value)
     {
         _playerInput.Sensitivity = value;
+    }
+
+    private void SetSound(float value)
+    {
+        _mixer.SetFloat("Sound", (1 - value) * SoundValue);
+    }
+
+    private void SetMusic(float value)
+    {
+        _mixer.SetFloat("Music", (1 - value) * SoundValue);
+    }
+
+    private void SetBrightness(float value)
+    {
+        RenderSettings.skybox.SetFloat("_Exposure", value);
     }
 
     private void GameExit()
@@ -92,10 +127,16 @@ public class Game : MonoBehaviour
 
         _collectibleObjects.Remove(collectibleObject);
         _playerUI.SetNotionCollect(MaxCollect - _collectibleObjects.Count, MaxCollect);
+        _playerUI.Compass.Initialization(_collectibleObjects.ToArray());
     }
 
     private void LoadNextLevel()
     {
         SceneManager.LoadScene(_nextLevel);
+    }
+
+    private void LoadDeadScene()
+    {
+        SceneManager.LoadScene(DeadScene);
     }
 }

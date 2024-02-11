@@ -15,13 +15,13 @@ public class EssenceMovement : MonoBehaviour
     private CharacterController _characterController;
 
     [Header("Speed ")]
-    [SerializeField, Range(0.001f, 0.1f)] private float _speedNormal = 0.01f;
-    [SerializeField, Range(0.001f, 0.1f)] private float _speedRun = 0.018f;
-    [SerializeField, Range(0.001f, 0.1f)] private float _speedSit = 0.005f;
-    [SerializeField, Range(0.001f, 0.1f)] private float _speedUse = 0.007f;
+    [SerializeField, Range(0.1f, 100f)] private float _speedNormal = 1f;
+    [SerializeField, Range(0.1f, 100f)] private float _speedRun = 1f;
+    [SerializeField, Range(0.1f, 100f)] private float _speedSit = 1f;
+    [SerializeField, Range(0.1f, 100f)] private float _speedUse = 1f;
     
     [Header("Force")]
-    [SerializeField, Range(0.01f, 1f)] private float _forceJump = 0.1f;
+    [SerializeField, Range(0.01f, 100f)] private float _forceJump = 0.1f;
 
     [Header("Expenses stamina")]
     [SerializeField, Range(0.1f, 2f)] private float _jumpStamina = 1f;
@@ -53,7 +53,7 @@ public class EssenceMovement : MonoBehaviour
     public void MoveInputHandler(Vector2 vector)
     {
         var move = transform.right * vector.x + transform.forward * vector.y;
-        _characterController.Move(move * _currentSpeed);
+        _characterController.Move(move * _currentSpeed * Time.deltaTime);
     }
 
     public void EssenceStateHandler(EssenceState state)

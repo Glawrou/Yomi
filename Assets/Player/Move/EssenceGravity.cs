@@ -12,10 +12,16 @@ public class EssenceGravity : MonoBehaviour
     public const float StartVelocity = -0.01f;
 
     private float _velocity = 0;
+    private bool _useGravity = true;
 
     public void Initialization(CharacterController characterController)
     {
         _characterController = characterController;
+    }
+    
+    public void SetUseGravity(bool isUseGravity)
+    {
+        _useGravity = isUseGravity;
     }
 
     public void SetVelocity(float value)
@@ -25,6 +31,11 @@ public class EssenceGravity : MonoBehaviour
 
     public void UpdateHandler()
     {
+        if (!_useGravity)
+        {
+            return;
+        }
+
         _characterController.Move(Vector3.up * _velocity);
         if (_groundCheck.IsGrounded && _velocity < StartVelocity)
         {
