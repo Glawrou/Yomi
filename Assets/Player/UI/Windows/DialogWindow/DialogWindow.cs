@@ -41,9 +41,14 @@ public class DialogWindow : Window
         }
 
         _buttonsAnswer.Clear();
-        Sey(dialogData.AudioText);
-        _textView.Print(dialogData.Text, dialogData.AudioText.length);
-        yield return new WaitForSeconds(dialogData.AudioText.length);
+        var time = dialogData.AudioText != null ? dialogData.AudioText.length : 5;
+        if (dialogData.AudioText != null)
+        {
+            Sey(dialogData.AudioText);
+        }
+
+        _textView.Print(dialogData.Text, time);
+        yield return new WaitForSeconds(time);
         _buttonsAnswer.Open(dialogData.Answers);
     }
 

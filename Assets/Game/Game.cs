@@ -131,7 +131,7 @@ public class Game : MonoBehaviour
         _playerUI.Compass.Initialization(_collectibleObjects.ToArray());
     }
 
-    private void LoadNextLevel()
+    protected void LoadNextLevel()
     {
         SceneManager.LoadScene(_nextLevel);
     }
