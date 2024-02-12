@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d6af021a9e4365e46be60aba2ac9c8a7, type: 3}
       propertyPath: m_Name
-      value: Child1
+      value: BaseChild
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d6af021a9e4365e46be60aba2ac9c8a7, type: 3}
       propertyPath: m_TagString
@@ -195,17 +195,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b8ab92083d6114b9e58185d0700659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _essenceMovement: {fileID: 0}
+  _essenceGravity: {fileID: 0}
+  _characterController: {fileID: 0}
+  _colliderTrigger: {fileID: 0}
+  _offsetRotate: 0
+  _speedMove: 50
   _audioSource: {fileID: 1440468147}
-  _speed: 4
---- !u!114 &2963190591813514438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7203248002732402752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56454da99c0d774c94b7bd93f1d9d94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _speedOut: 5

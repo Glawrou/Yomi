@@ -109,7 +109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7203248002732402752, guid: 2458d7aedb4b3bf489169658a3f0abc2, type: 3}
       propertyPath: m_Name
-      value: Child2
+      value: Child3
       objectReference: {fileID: 0}
     - target: {fileID: 7203248002732402752, guid: 2458d7aedb4b3bf489169658a3f0abc2, type: 3}
       propertyPath: m_Layer
@@ -162,7 +162,7 @@ PrefabInstance:
     - target: {fileID: 8953733697645853240, guid: 2458d7aedb4b3bf489169658a3f0abc2, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 6485275288745547619, guid: 34b8c45f718611e46a2286a7b69bcfb7, type: 3}
+      objectReference: {fileID: -6721140502780782249, guid: 030f282fce7f4914d9ddbc9407558eec, type: 3}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 2458d7aedb4b3bf489169658a3f0abc2, type: 3}

@@ -84,6 +84,10 @@ PrefabInstance:
       value: 2.03
       objectReference: {fileID: 0}
     - target: {fileID: 1440468149, guid: 2458d7aedb4b3bf489169658a3f0abc2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440468149, guid: 2458d7aedb4b3bf489169658a3f0abc2, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
@@ -109,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7203248002732402752, guid: 2458d7aedb4b3bf489169658a3f0abc2, type: 3}
       propertyPath: m_Name
-      value: Child2
+      value: Child1
       objectReference: {fileID: 0}
     - target: {fileID: 7203248002732402752, guid: 2458d7aedb4b3bf489169658a3f0abc2, type: 3}
       propertyPath: m_Layer
@@ -159,10 +163,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8953733697645853240, guid: 2458d7aedb4b3bf489169658a3f0abc2, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 6485275288745547619, guid: 34b8c45f718611e46a2286a7b69bcfb7, type: 3}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 2458d7aedb4b3bf489169658a3f0abc2, type: 3}

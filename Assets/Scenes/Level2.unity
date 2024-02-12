@@ -182,7 +182,13 @@ MonoBehaviour:
   - {fileID: 1915027680}
   - {fileID: 1944353479}
   - {fileID: 1218358985}
-  _childPrefab: {fileID: 6256567791995725218, guid: b95c449b44de709409c408aaae009c9a, type: 3}
+  _childPrefab:
+  - {fileID: 6256567791995725218, guid: b95c449b44de709409c408aaae009c9a, type: 3}
+  - {fileID: 6256567791995725218, guid: fdeba906ca6421f40adb985ce489daf2, type: 3}
+  - {fileID: 6256567791995725218, guid: 644b69616579b874cac054bb031d908f, type: 3}
+  - {fileID: 6256567791995725218, guid: bb97747edaafc9f4ebb43ee5a64eb6d6, type: 3}
+  - {fileID: 6256567791995725218, guid: b1f179ec90e4ecd4da2034cac0bfc8bc, type: 3}
+  DistancePlayerSpawn: 40
 --- !u!1 &49023783
 GameObject:
   m_ObjectHideFlags: 0

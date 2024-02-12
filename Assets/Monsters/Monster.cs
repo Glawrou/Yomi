@@ -11,7 +11,6 @@ public abstract class Monster : MonoBehaviour
     [SerializeField] protected EssenceGravity _essenceGravity;
 
     [SerializeField] private CharacterController _characterController;
-    [SerializeField] private ColliderTrigger _colliderTrigger;
     [SerializeField] private float _offsetRotate = 0f;
     [SerializeField] private float _speedMove = 50f;
 
@@ -22,7 +21,6 @@ public abstract class Monster : MonoBehaviour
     private void Start()
     {
         _essenceMovement.Initialization(_characterController);
-        _colliderTrigger.OnEnterTrigger += KillPlayer;
     }
 
     public void Initialization(Player player)
@@ -30,7 +28,7 @@ public abstract class Monster : MonoBehaviour
         _player = player;
     }    
 
-    public void Update()
+    protected void Move(Vector3 move)
     {
         _essenceMovement.UpdateHandler();
         if (!_player)
@@ -39,7 +37,7 @@ public abstract class Monster : MonoBehaviour
         }
 
         SetRotateY(_player.transform.position);
-        _essenceMovement.MoveInputHandler(-Vector2.right * _speedMove);
+        _essenceMovement.MoveInputHandler(move * _speedMove);
     }
 
     private void SetRotateY(Vector3 targetCoordinates)
@@ -54,6 +52,11 @@ public abstract class Monster : MonoBehaviour
     {
         OnDead?.Invoke();
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        KillPlayer(other.gameObject);
     }
 
     private void KillPlayer(GameObject obj)

@@ -16,6 +16,11 @@ public class Child : Monster
         StartCoroutine(OutProcess());
     }
 
+    public void Update()
+    {
+        Move(-Vector2.right);
+    }
+
     private IEnumerator OutProcess()
     {
         while (transform.position.y < Height)

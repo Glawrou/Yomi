@@ -123,6 +123,7 @@ public class Game : MonoBehaviour
         if (_collectibleObjects.Count == 1)
         {
             SpawnElevator(_player.transform.position + Vector3.up * HeightSpawnElevator).OnCloseDoor += LoadNextLevel;
+            _playerUI.Compass.gameObject.SetActive(false);
         }
 
         _collectibleObjects.Remove(collectibleObject);
